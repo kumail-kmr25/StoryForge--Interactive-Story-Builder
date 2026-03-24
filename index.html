@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark-fantasy">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="StoryForge — An interactive story builder for crafting branching narratives with multiple paths and endings.">
+  <title>StoryForge — Interactive Story Builder</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient Background -->
+  <div class="ambient-bg" aria-hidden="true">
+    <div class="ambient-orb"></div>
+    <div class="ambient-orb"></div>
+    <div class="ambient-orb"></div>
+  </div>
+
+  <!-- Mobile Sidebar Toggle -->
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle sidebar">☰</button>
+
+  <!-- Mobile Sidebar Overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- App Container -->
+  <div class="app-container">
+
+    <!-- ═══ Sidebar ═══ -->
+    <aside class="sidebar" id="sidebar">
+      <header class="sidebar-header">
+        <div class="logo">
+          <div class="logo-icon">📖</div>
+          <span class="logo-text">StoryForge</span>
+        </div>
+        <div class="logo-tagline">Interactive Fiction</div>
+      </header>
+
+      <div class="sidebar-content">
+        <!-- Navigation -->
+        <nav class="sidebar-section">
+          <div class="sidebar-section-title">Workspace</div>
+          <button class="sidebar-btn sidebar-nav-btn active" data-tab="editor">
+            <span class="icon">✏️</span> Node Editor
+          </button>
+          <button class="sidebar-btn sidebar-nav-btn" data-tab="play">
+            <span class="icon">🎮</span> Play Story
+          </button>
+          <button class="sidebar-btn sidebar-nav-btn" data-tab="map">
+            <span class="icon">🗺️</span> Path Map
+          </button>
+          <button class="sidebar-btn sidebar-nav-btn" data-tab="settings">
+            <span class="icon">⚙️</span> Story Settings
+          </button>
+        </nav>
+
+        <!-- Actions -->
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">Actions</div>
+          <button class="sidebar-btn" id="newStoryBtn">
+            <span class="icon">✦</span> New Story
+          </button>
+        </div>
+
+        <!-- Saved Stories -->
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">Your Stories</div>
+          <div class="story-list" id="storyList">
+            <div class="text-muted text-sm" style="padding:8px 4px;">No stories yet</div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="sidebar-footer">
+        <button class="btn-sm" id="exportAllBtn" title="Export all stories">📤 Export</button>
+        <button class="btn-sm" id="importAllBtn" title="Import stories">📥 Import</button>
+      </footer>
+    </aside>
+
+    <!-- ═══ Main Content ═══ -->
+    <main class="main-content">
+
+      <!-- Top Bar -->
+      <header class="top-bar">
+        <div class="top-bar-left">
+          <h1 class="current-story-title" id="currentStoryTitle">StoryForge</h1>
+          <span class="story-theme-badge hidden" id="storyThemeBadge"></span>
+        </div>
+        <nav class="top-bar-tabs">
+          <button class="tab-btn active" data-tab="editor">✏️ Editor</button>
+          <button class="tab-btn" data-tab="play">🎮 Play</button>
+          <button class="tab-btn" data-tab="map">🗺️ Map</button>
+          <button class="tab-btn" data-tab="settings">⚙️ Settings</button>
+        </nav>
+      </header>
+
+      <!-- Workspace -->
+      <section class="workspace">
+        <!-- Editor Panel -->
+        <div class="workspace-panel active" id="panel-editor">
+          <div id="editorContent"></div>
+        </div>
+
+        <!-- Play Panel -->
+        <div class="workspace-panel" id="panel-play">
+          <div id="playContent"></div>
+        </div>
+
+        <!-- Map Panel -->
+        <div class="workspace-panel" id="panel-map">
+          <div id="mapContent"></div>
+        </div>
+
+        <!-- Settings Panel -->
+        <div class="workspace-panel" id="panel-settings">
+          <div id="settingsContent"></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ═══ Modal ═══ -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modalTitle">Modal</h2>
+        <button class="modal-close" id="modalClose" aria-label="Close modal">✕</button>
+      </div>
+      <div id="modalBody"></div>
+      <div style="margin-top:20px;display:flex;justify-content:flex-end;gap:8px;">
+        <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-primary" id="modalConfirm">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
